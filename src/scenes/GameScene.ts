@@ -24,26 +24,30 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
  * available here in the init() et create() callbacks.
  */
 export class GameScene extends Phaser.Scene {
-    private player: Player;
+    private _player: Player;
     private papers: Phaser.GameObjects.Group;
     private contaminatedPapers: Phaser.GameObjects.Group;
     private paperCreationEvent: Phaser.Time.TimerEvent;
     private contamPaperCreationEvent: Phaser.Time.TimerEvent;
     private newSceneTimedEvent: Phaser.Time.TimerEvent;
-    private score: Phaser.GameObjects.Text;
+	private score: Phaser.GameObjects.Text;
+	
+	get player(): Player {
+		return this._player;
+	}
 
     private setColliders(): void {
-        this.physics.add.collider(this.player, this.papers, (player, paper) => {
-            this.player.increaseScore();
-            this.score.setText(`SCORE : ${this.player.score}`);
+        this.physics.add.collider(this._player, this.papers, (player, paper) => {
+            this._player.increaseScore();
+            this.score.setText(`SCORE : ${this._player.score}`);
             paper.destroy();
         });
 
         this.physics.add.collider(
-            this.player,
+            this._player,
             this.contaminatedPapers,
             (player, paper) => {
-                this.player.hurt();
+                this._player.hurt();
                 paper.destroy();
             }
         );
@@ -96,7 +100,7 @@ export class GameScene extends Phaser.Scene {
             callbackScope: this,
         });
 
-        this.player = new Player({
+        this._player = new Player({
             scene: this,
             x: 300,
             y: 300,
@@ -110,21 +114,21 @@ export class GameScene extends Phaser.Scene {
         this.score = this.make.text({
             x: 20,
             y: 40,
-            text: `SCORE : ${this.player.score}`,
+            text: `SCORE : ${this._player.score}`,
             style: {
 				font: "32px monospace",
 				fontStyle: "strong"
             },
         });
 
-        this.setColliders();
+		this.setColliders();
     }
 
     update() {
-		this.player.update();
+		this._player.update();
 		
-		if (this.player.isDead()) {
-			this.scene.start("Gameover");
+		if (this._player.isDead()) {
+			this.scene.start("Gameover", {"score": this._player.score});
 		}
     }
 }

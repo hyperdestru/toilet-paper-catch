@@ -10,20 +10,35 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 };
 
 export class GameoverScene extends Phaser.Scene {
-    private mainMessage: string;
+    private mainMessage: Phaser.GameObjects.Text;
 
     constructor() {
         super(sceneConfig);
 	}
 
+	init(gameSceneData) {
+		this.data.set("score", gameSceneData.score);
+	}
+
     create() {
-		this.make.text({
+		this.mainMessage = this.make.text({
             x: getGameWidth(this) / 2,
             y: getGameHeight(this) / 2,
 			text: "YOU. ARE. DEAD",
 			origin: 0.5,
             style: {
 				font: "64px monospace",
+				fontStyle: "strong"
+            },
+		});
+
+		this.make.text({
+            x: getGameWidth(this) / 2,
+            y: this.mainMessage.y + 55,
+			text: `Your score : ${this.data.get("score")}`,
+			origin: 0.5,
+            style: {
+				font: "32px monospace",
 				fontStyle: "strong"
             },
 		});

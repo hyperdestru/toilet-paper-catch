@@ -4,7 +4,7 @@ import { getGameWidth, getGameHeight, COLORS } from "../helpers";
 
 export class Paper extends Phaser.Physics.Arcade.Image {
 
-    private isOut(): boolean {
+    isOut(): boolean {
         if (this.y > getGameHeight(this.scene) || this.y < 0) {
             return true;
         }
@@ -29,7 +29,7 @@ export class Paper extends Phaser.Physics.Arcade.Image {
 
     update(): void {
         if (this.isOut()) {
-            this.destroy();
+			this.destroy();
         }
     }
 }

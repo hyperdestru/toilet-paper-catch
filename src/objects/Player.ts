@@ -19,6 +19,10 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 		this._score += 5;
 	}
 
+	decreaseScore(): void {
+		this._score -= 5;
+	}
+
     public isDead(): boolean {
         return this.health <= 0;
     }
@@ -44,6 +48,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.world.enable(this);
 		this.setCollideWorldBounds(true);
 		this.setGravityY(1000);
+		this.setBounce(0.5);
     }
 
     private initControls(pKeys): void {
