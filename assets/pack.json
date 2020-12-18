@@ -1,0 +1,26 @@
+{
+	"preload": {
+		"files": [
+			{
+				"type": "image",
+				"key": "logo",
+				"url": "assets/images/logo.jpg"
+			},
+			{
+				"type": "image",
+				"key": "paper",
+				"url": "assets/images/paper.png"
+			},
+			{
+				"type": "image",
+				"key": "toilet",
+				"url": "assets/images/toilet.png"
+			},
+			{
+				"type": "image",
+				"key": "store",
+				"url": "assets/images/store.jpg"
+			}
+		]
+	}
+}
