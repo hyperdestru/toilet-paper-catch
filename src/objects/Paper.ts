@@ -1,8 +1,12 @@
 /** @format */
 
 import { getGameWidth, getGameHeight, COLORS } from "../helpers";
+import { GameScene } from "../scenes/GameScene";
+import { Player } from "./Player";
 
 export class Paper extends Phaser.Physics.Arcade.Image {
+
+	private player: Player;
 
     isOut(): boolean {
         if (this.y > getGameHeight(this.scene) || this.y < 0) {
@@ -16,6 +20,7 @@ export class Paper extends Phaser.Physics.Arcade.Image {
 		x: number;
 		y: number;
 		textureKey: string;
+		player?: Player;
 	}) {
 		super(params.scene, params.x, params.y, params.textureKey);
 		
@@ -24,12 +29,19 @@ export class Paper extends Phaser.Physics.Arcade.Image {
 		this.scene.physics.world.enable(this);
 
 		this.setGravityY(10);
-        this.setVelocity(0, 110);
-    }
+		this.setVelocity(0, 110);
+
+		if (params.player) {
+			this.player = params.player;
+		}
+	}
 
     update(): void {
         if (this.isOut()) {
 			this.destroy();
+			if (this.player && !this.player.scoreIsNeg()) {
+				this.player.decreaseScore();
+			}
         }
     }
 }

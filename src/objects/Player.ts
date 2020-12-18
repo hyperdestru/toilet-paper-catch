@@ -23,7 +23,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 		this._score -= 5;
 	}
 
-    public isDead(): boolean {
+	scoreIsNeg(): boolean {
+		return this._score <= 0;
+	}
+
+    isDead(): boolean {
         return this.health <= 0;
     }
 
