@@ -27,6 +27,7 @@ export class GameScene extends Phaser.Scene {
     private setColliders(): void {
         this.physics.add.collider(this.player, this.papers, (player, paper) => {
             this.player.increaseScore();
+            this.player.clearSound.play();
             paper.destroy();
         });
 

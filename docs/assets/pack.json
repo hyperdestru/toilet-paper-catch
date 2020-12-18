@@ -25,6 +25,11 @@
 				"type": "audio",
 				"key": "contaminatedSound",
 				"url": "assets/sounds/fart.mp3"
+			},
+			{
+				"type": "audio",
+				"key": "clearSound",
+				"url": "assets/sounds/coin2.wav"
 			}
 		]
 	}

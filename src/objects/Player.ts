@@ -12,6 +12,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 	private _score: number;
     private canGo: boolean;
 	contaminatedSound: Phaser.Sound.BaseSound;
+	clearSound: Phaser.Sound.BaseSound;
 
 	get score(): number {
 		return this._score;
@@ -46,6 +47,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     private initSounds(): void {
         this.contaminatedSound = this.scene.sound.add("contaminatedSound");
+        this.clearSound = this.scene.sound.add("clearSound");
     }
 
     private initVitals(): void {
