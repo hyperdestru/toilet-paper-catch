@@ -35,6 +35,7 @@ export class GameScene extends Phaser.Scene {
             this.contaminatedPapers,
             (player, paper) => {
                 this.player.hurt();
+                this.player.contaminatedSound.play();
                 paper.destroy();
             }
         );

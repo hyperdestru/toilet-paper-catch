@@ -16,8 +16,8 @@ export class Paper extends Phaser.Physics.Arcade.Image {
             return true;
         }
         return false;
-    }
-
+	}
+	
     constructor(params: {
 		scene: Phaser.Scene;
 		x: number;

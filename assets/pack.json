@@ -20,6 +20,11 @@
 				"type": "image",
 				"key": "store",
 				"url": "assets/images/store.jpg"
+			},
+			{
+				"type": "audio",
+				"key": "contaminatedSound",
+				"url": "assets/sounds/fart.mp3"
 			}
 		]
 	}
