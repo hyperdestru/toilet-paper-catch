@@ -6,6 +6,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private healthBar: HealthBar;
     private rightKey: Phaser.Input.Keyboard.Key;
     private leftKey: Phaser.Input.Keyboard.Key;
+    private upKey: Phaser.Input.Keyboard.Key;
     private health: number;
 	private vx: number;
 	private _score: number;
@@ -58,6 +59,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private initControls(pKeys): void {
         this.rightKey = this.scene.input.keyboard.addKey(pKeys["right"]);
         this.leftKey = this.scene.input.keyboard.addKey(pKeys["left"]);
+        this.upKey = this.scene.input.keyboard.addKey(pKeys["jump"]);
     }
 
     private initHealthBar(pHealthBar: HealthBar): void {
@@ -87,6 +89,19 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 		}
     }
 
+    /**
+     * Handle jumping AND jumping-shooting.
+     * This includes animation playing, checking key press, setting velocity,
+     * create shoots and remembering last pressed key.
+     */
+    private handleJumping(): void {
+        if (this.upKey.isDown) {
+            if (this.body.blocked.down || this.body.touching.down) {
+                this.setVelocityY(-500);
+            }
+        }
+    }
+
     constructor(params: {
         scene: Phaser.Scene;
         x: number;
@@ -109,6 +124,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(): void {
+        if (this.upKey.isDown) {
+            this.handleJumping();
+        }
         if (this.rightKey.isDown || this.leftKey.isDown) {
             this.handleWalking();
         } else {
