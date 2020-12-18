@@ -31,15 +31,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     create() {
-		this.make.text({
-            x: getGameWidth(this) / 2,
-            y: getGameHeight(this) / 2,
-            text: "TOILET PAPER CATCH !",
-            style: {
-                font: "32px monospace",
-			},
-			origin: 0.5,
-        });
+		this.add.image(getGameWidth(this)/2, getGameHeight(this)/2, "logo");
 
         this.btn = new SceneStartButton({
             scene: this,
@@ -48,9 +40,9 @@ export class BootScene extends Phaser.Scene {
 			width: 124, 
 			height: 44,
 			color: COLORS.white.hex,
-			hoverColor: COLORS.customBlue.hex,
+			hoverColor: COLORS.customYellow.hex,
 			label: "START",
-			fontSize: "32px",
+			fontSize: "24px",
 			fontColor: COLORS.black.string,
 			alpha: 1,
 			newSceneKey: "Game"

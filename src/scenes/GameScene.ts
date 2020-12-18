@@ -112,7 +112,8 @@ export class GameScene extends Phaser.Scene {
             y: 40,
             text: `SCORE : ${this.player.score}`,
             style: {
-                font: "20px monospace",
+				font: "32px monospace",
+				fontStyle: "strong"
             },
         });
 
@@ -120,6 +121,10 @@ export class GameScene extends Phaser.Scene {
     }
 
     update() {
-        this.player.update();
+		this.player.update();
+		
+		if (this.player.isDead()) {
+			this.scene.start("Gameover");
+		}
     }
 }
