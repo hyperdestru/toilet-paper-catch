@@ -23,8 +23,13 @@
 			},
 			{
 				"type": "audio",
+				"key": "gameOverSound",
+				"url": "assets/sounds/gameover.wav"
+			},
+			{
+				"type": "audio",
 				"key": "contaminatedSound",
-				"url": "assets/sounds/fart.mp3"
+				"url": "assets/sounds/ouch.wav"
 			},
 			{
 				"type": "audio",

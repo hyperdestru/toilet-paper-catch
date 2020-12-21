@@ -10,10 +10,11 @@ const sceneConfig: Phaser.Types.Scenes.SettingsConfig = {
 };
 
 export class GameoverScene extends Phaser.Scene {
-    private mainMessage: Phaser.GameObjects.Text;
+	private mainMessage: Phaser.GameObjects.Text;
+	gameOverSound: Phaser.Sound.BaseSound;
 
     constructor() {
-        super(sceneConfig);
+		super(sceneConfig);
 	}
 
 	init(gameSceneData) {
@@ -21,6 +22,9 @@ export class GameoverScene extends Phaser.Scene {
 	}
 
     create() {
+		this.gameOverSound = this.sound.add("gameOverSound")
+		this.gameOverSound.play();
+
 		this.mainMessage = this.make.text({
             x: getGameWidth(this) / 2,
             y: getGameHeight(this) / 2,
