@@ -28,13 +28,13 @@
 			},
 			{
 				"type": "audio",
-				"key": "contaminatedSound",
-				"url": "assets/sounds/ouch.wav"
+				"key": "badPaperSound",
+				"url": "assets/sounds/fart.mp3"
 			},
 			{
 				"type": "audio",
-				"key": "clearSound",
-				"url": "assets/sounds/coin2.wav"
+				"key": "goodPaperSound",
+				"url": "assets/sounds/mmhh.mp3"
 			}
 		]
 	}
