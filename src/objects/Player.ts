@@ -9,13 +9,21 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private upKey: Phaser.Input.Keyboard.Key;
     private health: number;
 	private vx: number;
+	private jumpVelocity: number;
 	private _score: number;
-    private canGo: boolean;
-	contaminatedSound: Phaser.Sound.BaseSound;
-	clearSound: Phaser.Sound.BaseSound;
+	private _badPaperSound: Phaser.Sound.BaseSound;
+	private _goodPaperSound: Phaser.Sound.BaseSound;
 
 	get score(): number {
 		return this._score;
+	}
+
+	get badPaperSound(): Phaser.Sound.BaseSound {
+		return this._badPaperSound;
+	}
+
+	get goodPaperSound(): Phaser.Sound.BaseSound {
+		return this._goodPaperSound;
 	}
 
 	increaseScore(): void {
@@ -46,8 +54,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     private initSounds(): void {
-        this.contaminatedSound = this.scene.sound.add("contaminatedSound");
-        this.clearSound = this.scene.sound.add("clearSound");
+        this._badPaperSound = this.scene.sound.add("badPaperSound");
+        this._goodPaperSound = this.scene.sound.add("goodPaperSound");
     }
 
     private initVitals(): void {
@@ -55,7 +63,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     private initPhysics(): void {
-        this.vx = 150;
+        this.vx = 350;
+		this.jumpVelocity = -500;
     }
 
     private applyPhysics(): void {
@@ -91,10 +100,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
      */
     private handleWalking(): void {
         if (this.rightKey.isDown) {
-			this.x += 10;
-		} 
-		if (this.leftKey.isDown) {
-			this.x -= 10;
+			this.setVelocityX(this.vx);
+		} else if (this.leftKey.isDown) {
+			this.setVelocityX(-this.vx);
 		}
     }
 
@@ -106,7 +114,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     private handleJumping(): void {
         if (this.upKey.isDown) {
             if (this.body.blocked.down || this.body.touching.down) {
-                this.setVelocityY(-500);
+                this.setVelocityY(this.jumpVelocity);
             }
         }
     }
@@ -129,7 +137,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.initHealthBar(params.healthBar);
 		this.initControls(params.controlKeys);
 		this._score = 0;
-		this.canGo = true;
     }
 
     update(): void {

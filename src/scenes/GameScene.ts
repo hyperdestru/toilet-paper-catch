@@ -27,7 +27,7 @@ export class GameScene extends Phaser.Scene {
     private setColliders(): void {
         this.physics.add.collider(this.player, this.papers, (player, paper) => {
             this.player.increaseScore();
-            this.player.clearSound.play();
+            this.player.goodPaperSound.play();
             paper.destroy();
         });
 
@@ -36,7 +36,7 @@ export class GameScene extends Phaser.Scene {
             this.contaminatedPapers,
             (player, paper) => {
                 this.player.hurt();
-                this.player.contaminatedSound.play();
+                this.player.badPaperSound.play();
                 paper.destroy();
             }
         );
@@ -105,6 +105,7 @@ export class GameScene extends Phaser.Scene {
                         x: Phaser.Math.Between(50, getGameWidth(this) - 50),
                         y: 0,
                         textureKey: "paper",
+						player: this.player
                     })
                 );
             },
