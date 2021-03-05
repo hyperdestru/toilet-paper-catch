@@ -4,6 +4,5 @@
 
 ### Catch the non-contaminated toilet papers rolls !
 
-#### Controls : 
-Right and left arrows
+Page Itch : https://hyperdestru.itch.io/toilet-paper-catch
 
